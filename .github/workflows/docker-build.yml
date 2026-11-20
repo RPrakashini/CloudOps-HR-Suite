@@ -53,6 +53,10 @@ jobs:
 
       - name: Display running containers
         run: docker compose ps
+      - name: Display application logs
+        if: always()
+        run: |
+          docker compose logs --no-color
 
       - name: Display logs if pipeline fails
         if: failure()
