@@ -44,6 +44,12 @@ jobs:
         env:
           API_URL: http://127.0.0.1
         run: node test-api.js
+      - name: Verify backend health endpoint
+        run: |
+          response=$(curl --fail --silent http://127.0.0.1:5000/health)
+          echo "$response"
+          echo "$response" | grep -q '"status":"UP"'
+          echo "Backend health check passed!"
 
       - name: Display running containers
         run: docker compose ps
