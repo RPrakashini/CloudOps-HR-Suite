@@ -28,6 +28,13 @@ db.connect((err) => {
 });
 
 // Health check
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'UP',
+    application: 'CloudOps HR Suite Backend',
+    timestamp: new Date().toISOString()
+  });
+});
 app.get('/', (req, res) => {
   res.json({ message: 'Employee Management API is running' });
 });
