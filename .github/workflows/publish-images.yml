@@ -1,0 +1,48 @@
+
+name: CloudOps HR Suite - Publish Docker Images
+
+on:
+  workflow_run:
+    workflows: ["CloudOps HR Suite - CI Pipeline"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tested source code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Backend
+          push: true
+          tags: |
+            ghcr.io/rprakashini/cloudops-hr-suite-backend:latest
+            ghcr.io/rprakashini/cloudops-hr-suite-backend:${{ github.event.workflow_run.head_sha }}
+
+      - name: Build and publish frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Frontend
+          push: true
+          tags: |
+            ghcr.io/rprakashini/cloudops-hr-suite-frontend:latest
+            ghcr.io/rprakashini/cloudops-hr-suite-frontend:${{ github.event.workflow_run.head_sha }}
