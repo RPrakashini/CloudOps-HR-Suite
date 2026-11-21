@@ -1,28 +1,33 @@
 # CloudOps HR Suite – Employee Management Platform
 
-A containerized employee management application with automated CI, integration testing, Docker image publishing, health checks, and application logging using GitHub Actions.
+A containerized full-stack employee management application demonstrating Docker-based deployment, automated CI testing, Docker image publishing, health checks, and application logging.
 
 ## Project Overview
 
-CloudOps HR Suite is a full-stack employee management application developed using React.js, Node.js, Express.js, and MySQL.
+CloudOps HR Suite is a full-stack employee management platform developed using React.js, Node.js, Express.js, and MySQL.
 
-The project demonstrates how a web application can be containerized and integrated with a DevOps pipeline using Docker, Docker Compose, GitHub Actions, and GitHub Container Registry (GHCR).
+The project demonstrates containerization, multi-container orchestration, automated integration testing, and Docker image publishing using GitHub Actions and GitHub Container Registry (GHCR).
 
 **Project Type:** Cloud & DevOps Portfolio Project
+
+## Application Dashboard
+
+![CloudOps HR Suite Dashboard](screenshots/dashboard.png)
 
 ## Key Features
 
 - Add, view, update, and delete employee records.
-- React-based frontend interface.
-- Node.js and Express backend REST API.
+- React-based frontend with Bootstrap.
+- REST API developed using Node.js and Express.js.
 - MySQL database integration.
-- Docker-based application containerization.
+- Docker containerization for frontend and backend.
 - Multi-container orchestration using Docker Compose.
 - Nginx reverse proxy configuration.
 - Automated API integration testing.
-- Automated Docker image publishing.
-- Backend health endpoint.
-- Application request logging.
+- GitHub Actions CI pipeline.
+- Automated Docker image publishing to GHCR.
+- Backend health-check endpoint.
+- HTTP request logging.
 
 ## Technology Stack
 
@@ -33,31 +38,28 @@ The project demonstrates how a web application can be containerized and integrat
 | Database | MySQL |
 | Containerization | Docker, Docker Compose |
 | Web Server | Nginx |
-| CI/CD | GitHub Actions |
+| CI | GitHub Actions |
 | Container Registry | GitHub Container Registry |
 | Version Control | Git, GitHub |
-| Testing | Node.js API integration tests |
+| Testing | Node.js API Integration Tests |
 
 ## System Architecture
 
-```text
-             User / Browser
-                   |
-                   v
-            React Frontend
-             (Nginx)
-              Port 80
-                   |
-                   v
-             Reverse Proxy
-                   |
-                   v
-          Node.js / Express API
-              Port 5000
-                   |
-                   v
-              MySQL DB
-```
+
+flowchart TD
+    A[User / Browser] --> B[React Frontend]
+    B --> C[Nginx Reverse Proxy]
+    C --> D[Node.js / Express Backend]
+    D --> E[(MySQL Database)]
+
+    B --- F[Docker Container]
+    D --- G[Docker Container]
+    E --- H[Docker Container]
+
+    I[Docker Compose] -. Manages .-> F
+    I -. Manages .-> G
+    I -. Manages .-> H
+
 
 All application services run as separate Docker containers connected through a Docker Compose network.
 
@@ -65,33 +67,32 @@ All application services run as separate Docker containers connected through a D
 
 ### 1. Docker Containerization
 
-- Created a Dockerfile for the React frontend.
-- Created a Dockerfile for the Node.js backend.
+- Created separate Dockerfiles for the frontend and backend.
 - Configured Nginx to serve the frontend and forward API requests.
-- Used Docker Compose to manage the frontend, backend, and MySQL containers.
+- Used Docker Compose to manage frontend, backend, and MySQL services.
+- Configured database initialization using a MySQL schema file.
 
 ### 2. Continuous Integration – GitHub Actions
 
-Implemented an automated CI pipeline that:
+Implemented an automated CI workflow that:
 
 - Checks out the source code.
-- Builds the frontend and backend Docker images.
-- Starts the application services using Docker Compose.
+- Builds frontend and backend Docker images.
+- Starts application services using Docker Compose.
 - Verifies application availability.
 - Executes automated employee API tests.
 - Validates the backend health endpoint.
 - Captures application logs.
-- Cleans up containers after execution.
+- Cleans up containers and test volumes after execution.
 
 ### 3. Docker Image Publishing – GHCR
 
 Implemented a separate GitHub Actions workflow that runs after successful CI completion.
 
 - Authenticates with GitHub Container Registry using `GITHUB_TOKEN`.
-- Builds the backend Docker image.
-- Builds the frontend Docker image.
+- Builds frontend and backend Docker images.
 - Publishes both images to GHCR.
-- Tags images with `latest` and the corresponding commit SHA.
+- Tags images using `latest` and the corresponding commit SHA.
 
 ### 4. Health Checks and Logging
 
@@ -102,7 +103,7 @@ Implemented a separate GitHub Actions workflow that runs after successful CI com
 
 ## Docker Images
 
-The following container images are published to GitHub Container Registry:
+The following images are published to GitHub Container Registry:
 
 **Backend**
 
@@ -116,7 +117,7 @@ ghcr.io/rprakashini/cloudops-hr-suite-backend:latest
 ghcr.io/rprakashini/cloudops-hr-suite-frontend:latest
 ```
 
-## Running the Application Locally
+## Running the Application
 
 ### Prerequisites
 
@@ -144,13 +145,13 @@ The database schema is initialized automatically during the first MySQL initiali
 
 ### 3. Access the Application
 
-Frontend:
+**Frontend**
 
 ```text
 http://localhost
 ```
 
-Backend health endpoint:
+**Backend Health Endpoint**
 
 ```text
 http://localhost:5000/health
@@ -174,7 +175,7 @@ docker compose down --volumes
 
 The project has successfully passed the following automated checks in GitHub Actions:
 
-- Backend and frontend Docker image builds.
+- Frontend and backend Docker image builds.
 - MySQL database initialization.
 - Docker Compose multi-container integration.
 - Employee Create, Read, Update, and Delete API tests.
@@ -186,11 +187,13 @@ The project has successfully passed the following automated checks in GitHub Act
 
 The project currently demonstrates automated CI, container integration testing, and Docker image publishing.
 
+The application has also been run and tested in GitHub Codespaces.
+
 Deployment to a public cloud environment, production infrastructure, and live cloud monitoring are future enhancements.
 
 ## Repository
 
-GitHub: https://github.com/RPrakashini/Employee-Management-System
+**GitHub:** https://github.com/RPrakashini/Employee-Management-System
 
 ## Future Enhancements
 

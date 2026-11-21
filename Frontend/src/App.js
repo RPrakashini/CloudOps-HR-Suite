@@ -62,7 +62,7 @@ useEffect(() => {
         <div className="col-md-4">
           <div className="card shadow-sm">
             <div className="card-body text-center">
-              <h5>AWS Status</h5>
+              <h5>Application Status</h5>
               <h2 className="text-success">Healthy</h2>
             </div>
           </div>
@@ -72,7 +72,7 @@ useEffect(() => {
           <div className="card shadow-sm">
             <div className="card-body text-center">
               <h5>Database</h5>
-              <h2 className="text-info">Amazon RDS</h2>
+              <h2 className="text-info">MySQL</h2>
             </div>
           </div>
         </div>

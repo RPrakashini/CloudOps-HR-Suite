@@ -9,7 +9,7 @@ function Footer() {
 
       <p>Developed by Prakashini </p>
 
-      <small>AWS Cloud | Docker | Jenkins | CI/CD | Amazon RDS</small>
+      <small>React | Node.js | Express | MySQL | Docker | Nginx | GitHub Actions | GitHub Container Registry</small>
     </footer>
   );
 }
