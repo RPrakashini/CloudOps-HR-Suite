@@ -17,10 +17,10 @@ The project demonstrates containerization, multi-container orchestration, automa
 ## Key Features
 
 - Add, view, update, and delete employee records.
-- React-based frontend with Bootstrap.
-- REST API developed using Node.js and Express.js.
+- React-based frontend interface.
+- Node.js and Express.js REST API.
 - MySQL database integration.
-- Docker containerization for frontend and backend.
+- Docker-based application containerization.
 - Multi-container orchestration using Docker Compose.
 - Nginx reverse proxy configuration.
 - Automated API integration testing.
@@ -45,21 +45,22 @@ The project demonstrates containerization, multi-container orchestration, automa
 
 ## System Architecture
 
+The application follows a three-tier architecture with Docker Compose managing the application services.
 
+```mermaid
 flowchart TD
-    A[User / Browser] --> B[React Frontend]
-    B --> C[Nginx Reverse Proxy]
-    C --> D[Node.js / Express Backend]
-    D --> E[(MySQL Database)]
+    A["User / Browser"] --> B["React Frontend"]
+    B --> C["Nginx Reverse Proxy"]
+    C --> D["Node.js / Express Backend"]
+    D --> E[("MySQL Database")]
 
-    B --- F[Docker Container]
-    D --- G[Docker Container]
-    E --- H[Docker Container]
-
-    I[Docker Compose] -. Manages .-> F
-    I -. Manages .-> G
-    I -. Manages .-> H
-
+    subgraph Docker_Compose["Docker Compose Environment"]
+        B
+        C
+        D
+        E
+    end
+```
 
 All application services run as separate Docker containers connected through a Docker Compose network.
 
@@ -117,7 +118,7 @@ ghcr.io/rprakashini/cloudops-hr-suite-backend:latest
 ghcr.io/rprakashini/cloudops-hr-suite-frontend:latest
 ```
 
-## Running the Application
+## Running the Application Locally
 
 ### Prerequisites
 
