@@ -129,9 +129,9 @@ ghcr.io/rprakashini/cloudops-hr-suite-frontend:latest
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/RPrakashini/Employee-Management-System.git
+git clone https://github.com/RPrakashini/CloudOps-HR-Suite
 
-cd Employee-Management-System
+cd CloudOps-HR-Suite
 ```
 
 ### 2. Start the Application
@@ -194,7 +194,7 @@ Deployment to a public cloud environment, production infrastructure, and live cl
 
 ## Repository
 
-**GitHub:** https://github.com/RPrakashini/Employee-Management-System
+**GitHub:** https://github.com/RPrakashini/CloudOps-HR-Suite
 
 ## Future Enhancements
 
